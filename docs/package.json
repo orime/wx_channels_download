@@ -17,5 +17,11 @@
   },
   "dependencies": {
     "@scalar/api-reference": "^1.43.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "vue-demi"
+    ]
   }
 }

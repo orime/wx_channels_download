@@ -86,11 +86,11 @@ export default defineConfig(async () => {
   lang: "zh-CN",
   title: "wx_channels_download",
   description: "微信视频号下载工具文档",
-  base: "/",
+  base: "/wx_channels_download/",
   lastUpdated: true,
   head: [
-    ["link", { rel: "shortcut icon", href: "/favicon.png" }],
-    ["link", { rel: "icon", type: "image/png", href: "/favicon.png" }],
+    ["link", { rel: "shortcut icon", href: "/wx_channels_download/favicon.png" }],
+    ["link", { rel: "icon", type: "image/png", href: "/wx_channels_download/favicon.png" }],
   ],
   themeConfig: {
     nav: [

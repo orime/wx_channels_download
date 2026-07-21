@@ -1,0 +1,19 @@
+{
+  "name": "wxvideodownload-site",
+  "main": "worker.js",
+  "compatibility_date": "2026-07-21",
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "wxvideodownload.cyou",
+      "custom_domain": true
+    }
+  ],
+  "rules": [
+    {
+      "type": "Text",
+      "globs": ["**/*.html"],
+      "fallthrough": true
+    }
+  ]
+}

@@ -2,16 +2,6 @@
 // 对应 fetch_video_profile.go
 
 import indexHtml from "./index.html";
-import iconBase64 from "./icon.js";
-
-function base64ToBytes(base64) {
-  const binary = atob(base64);
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) {
-    bytes[i] = binary.charCodeAt(i);
-  }
-  return bytes;
-}
 
 export default {
   async fetch(request, env, ctx) {
@@ -26,14 +16,12 @@ export default {
 
     // GET /favicon.ico or /icon.png → serve icon
     if ((url.pathname === "/favicon.ico" || url.pathname === "/icon.png") && request.method === "GET") {
-      return new Response(base64ToBytes(iconBase64), {
-        headers: { "Content-Type": "image/png" },
-      });
+      return new Response(null, { status: 204 });
     }
 
     // GET / → serve index.html
     if (url.pathname === "/" && request.method === "GET") {
-      return new Response(indexHtml, {
+      return new Response(String(indexHtml), {
         headers: { "Content-Type": "text/html; charset=utf-8" },
       });
     }
@@ -234,6 +222,15 @@ async function fetchVideoProfile(shareUrl, cookie) {
 
 async function handleFetchVideoProfile(request, env) {
   try {
+    if (!env.COOKIE) {
+      return new Response(
+        JSON.stringify({ error: "Worker 未配置元宝 COOKIE" }),
+        {
+          status: 503,
+          headers: { ...corsHeaders(), "Content-Type": "application/json" },
+        }
+      );
+    }
     const body = await request.json();
     const shareUrl = body.url;
     if (!shareUrl) {

@@ -7,6 +7,11 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
+    if (url.protocol === "http:") {
+      url.protocol = "https:";
+      return Response.redirect(url.toString(), 301);
+    }
+
     // CORS preflight
     if (request.method === "OPTIONS") {
       return new Response(null, {
